@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YUAN-JIE 的小工具集</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a0;
+    --accent: #8b4513;
+    --muted: #8a7a6a;
+    --border: #d4c5a9;
+    --card: #faf7f2;
+    --green: #2d6a4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif TC', serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(139,69,19,0.06) 0%, transparent 50%);
+  }
+
+  header {
+    text-align: center;
+    padding: 64px 24px 48px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 3px;
+    background: var(--gold);
+  }
+  .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    letter-spacing: 0.05em;
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+  header p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+  }
+  .ornament { color: var(--gold); margin: 0 8px; }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  .section-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .tool-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    border-radius: 6px 0 0 6px;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,26,46,0.08);
+  }
+  .tool-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+  .tool-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-light);
+    border-radius: 2px;
+    padding: 2px 8px;
+    margin-bottom: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+  .tool-card h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .tool-card p {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .tool-arrow {
+    position: absolute;
+    right: 20px; bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .tool-card:hover .tool-arrow { opacity: 1; }
+
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="avatar">YJ</div>
+  <h1>YUAN-JIE 的小工具集</h1>
+  <p>用 Claude Code 打造的實用工具 <span class="ornament">◆</span> 持續更新中</p>
+</header>
+
+<div class="container">
+  <p class="section-title">工具列表</p>
+
+  <div class="grid">
+
+    <!-- 貸款計算機 -->
+    <a class="tool-card" href="https://nydiahsieh.github.io/loan-calculator/" target="_blank">
+      <div class="tool-icon">🏦</div>
+      <span class="tool-tag">財務計算</span>
+      <h2>貸款計算機</h2>
+      <p>已知月還款額求期數、已知年限求月付額，附等額本息 vs 等額本金比較表及完整攤還表。</p>
+      <span class="tool-arrow">→ 開啟工具</span>
+    </a>
+
+    <!-- 未來工具佔位 -->
+
+  </div>
+</div>
+
+<footer>
+  Built with Claude Code &nbsp;◆&nbsp; nydiahsieh.github.io
+</footer>
+
+</body>
+</html>
