@@ -218,6 +218,36 @@
   .form-msg.ok { background: #d5f5e3; border: 1px solid #2d6a4f; color: #2d6a4f; }
   .form-msg.err { background: #fde8e8; border: 1px solid var(--red); color: var(--red); }
 
+  /* ── DOC MODAL ── */
+  .doc-overlay {
+    display: none; position: fixed; inset: 0; z-index: 99999;
+    background: rgba(26,26,46,0.65); align-items: center; justify-content: center; padding: 20px;
+  }
+  .doc-overlay.open { display: flex; }
+  .doc-box {
+    background: var(--card); border-radius: 6px; width: 100%; max-width: 560px;
+    max-height: 80vh; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(26,26,46,0.3);
+  }
+  .doc-head {
+    background: var(--ink); color: var(--gold-light);
+    padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0;
+  }
+  .doc-head h2 { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; }
+  .doc-body { padding: 24px; overflow-y: auto; flex: 1; font-size: 0.83rem; line-height: 1.9; color: var(--ink); }
+  .doc-body h3 { font-size: 0.88rem; font-weight: 700; margin: 20px 0 6px; color: var(--ink); letter-spacing: 0.05em; }
+  .doc-body h3:first-child { margin-top: 0; }
+  .doc-body p { color: #555; margin-bottom: 4px; }
+  .doc-body ul { padding-left: 18px; color: #555; }
+  .doc-body ul li { margin-bottom: 4px; }
+  .doc-footer { padding: 14px 24px; border-top: 1px solid var(--border); text-align: right; flex-shrink: 0; }
+  .doc-footer button {
+    padding: 9px 24px; background: var(--ink); color: var(--gold-light);
+    border: none; border-radius: 3px; cursor: pointer;
+    font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600;
+  }
+
   /* ── FOOTER ── */
   footer {
     text-align: center; padding: 40px 24px;
@@ -340,7 +370,7 @@
         </div>
         <div class="checkbox-row">
           <input type="checkbox" id="agreeTerms">
-          <label for="agreeTerms">我已閱讀並同意本網站的<a href="#" onclick="return false">使用條款</a>與<a href="#" onclick="return false">隱私政策</a>。完成註冊即表示同意。</label>
+          <label for="agreeTerms">我已閱讀並同意本網站的<a href="#" onclick="openDoc('terms');return false">使用條款</a>與<a href="#" onclick="openDoc('privacy');return false">隱私政策</a>。完成註冊即表示同意。</label>
         </div>
         <button class="btn-submit" onclick="doRegister()">立即註冊</button>
       </div>
@@ -349,7 +379,119 @@
   </div>
 </div>
 
+<!-- ══ 使用條款 / 隱私政策 MODAL ══ -->
+<div class="doc-overlay" id="docModal">
+  <div class="doc-box">
+    <div class="doc-head">
+      <h2 id="docTitle">使用條款</h2>
+      <button class="modal-close" onclick="closeDoc()">✕</button>
+    </div>
+    <div class="doc-body" id="docBody"></div>
+    <div class="doc-footer">
+      <button onclick="closeDoc()">關閉</button>
+    </div>
+  </div>
+</div>
+
 <script>
+const DOCS = {
+  terms: {
+    title: '使用條款',
+    html: `
+      <h3>一、接受條款</h3>
+      <p>使用本網站（nydiahsieh.github.io，以下稱「本站」）及其所提供之任何工具、服務，即表示您已閱讀、理解並同意受本使用條款之約束。若您不同意，請勿使用本站服務。</p>
+
+      <h3>二、服務內容</h3>
+      <p>本站提供貸款計算、印花稅計算、銀行貸款控管等財務輔助工具，僅供參考與輔助計算之用，不構成任何財務、法律或稅務建議。使用者應自行判斷並負責相關決策。</p>
+
+      <h3>三、會員帳號</h3>
+      <ul>
+        <li>您須提供真實且正確的資料完成註冊。</li>
+        <li>帳號及密碼由您自行保管，請勿分享給他人使用。</li>
+        <li>如發現帳號遭盜用，請立即通知我們（yuanjie.ltd@gmail.com）。</li>
+        <li>本站保留在違反條款時暫停或終止帳號之權利。</li>
+      </ul>
+
+      <h3>四、使用限制</h3>
+      <p>您同意不得從事以下行為：</p>
+      <ul>
+        <li>以任何自動化工具大量存取或爬取本站資料。</li>
+        <li>將本站工具用於非法或違反公共利益之目的。</li>
+        <li>干擾本站正常運作或破壞相關設施。</li>
+      </ul>
+
+      <h3>五、智慧財產權</h3>
+      <p>本站所有內容、程式碼、設計及工具均屬元傑國際有限公司所有，未經書面授權不得重製、轉載或商業使用。</p>
+
+      <h3>六、免責聲明</h3>
+      <p>本站工具以「現況」提供，不保證計算結果之準確性、完整性或適用性。因使用本站工具所造成之任何損失，本站不負賠償責任。</p>
+
+      <h3>七、條款變更</h3>
+      <p>本站保留隨時修改本條款之權利，修改後將公告於本頁，繼續使用本站即視為同意修改後之條款。</p>
+
+      <h3>八、聯絡方式</h3>
+      <p>如有疑問，請來信：yuanjie.ltd@gmail.com</p>
+      <p style="margin-top:16px;font-size:0.76rem;color:#aaa;">最後更新：2026 年 6 月</p>
+    `
+  },
+  privacy: {
+    title: '隱私政策',
+    html: `
+      <h3>一、資料收集範圍</h3>
+      <p>當您在本站（nydiahsieh.github.io）註冊會員時，我們收集以下資料：</p>
+      <ul>
+        <li>姓名</li>
+        <li>電子郵件地址</li>
+        <li>密碼（經 SHA-256 雜湊處理後儲存，不保存明文）</li>
+      </ul>
+      <p>上述資料全部儲存於您自己的裝置（瀏覽器 localStorage），本站伺服器不儲存您的個人資料。</p>
+
+      <h3>二、資料用途</h3>
+      <ul>
+        <li>驗證會員身份，提供會員專屬工具之存取權限。</li>
+        <li>顯示個人化歡迎訊息。</li>
+        <li>本站不將您的個人資料用於行銷、廣告或出售給第三方。</li>
+      </ul>
+
+      <h3>三、資料儲存與安全</h3>
+      <ul>
+        <li>所有資料儲存於您裝置的瀏覽器 localStorage，僅在您本機存取。</li>
+        <li>密碼採用 SHA-256 加鹽雜湊，不以明文儲存。</li>
+        <li>清除瀏覽器資料即可完全刪除本站於您裝置上的所有資料。</li>
+      </ul>
+
+      <h3>四、Cookie 使用</h3>
+      <p>本站使用 localStorage 儲存登入狀態，不使用追蹤性 Cookie，亦不設置任何第三方分析或廣告追蹤。</p>
+
+      <h3>五、第三方服務</h3>
+      <p>本站工具頁面載入 Google Fonts、Bootstrap、Font Awesome 等公開 CDN 資源，這些服務可能依其各自隱私政策收集匿名使用資料。</p>
+
+      <h3>六、您的權利</h3>
+      <ul>
+        <li>您可隨時透過清除瀏覽器 localStorage 刪除所有本站資料。</li>
+        <li>如需協助或有隱私相關疑問，請來信：yuanjie.ltd@gmail.com</li>
+      </ul>
+
+      <h3>七、政策變更</h3>
+      <p>本隱私政策如有修改，將公告於本頁。繼續使用本站即視為同意修改後之政策。</p>
+      <p style="margin-top:16px;font-size:0.76rem;color:#aaa;">最後更新：2026 年 6 月</p>
+    `
+  }
+};
+
+function openDoc(type) {
+  const doc = DOCS[type];
+  document.getElementById('docTitle').textContent = doc.title;
+  document.getElementById('docBody').innerHTML = doc.html;
+  document.getElementById('docModal').classList.add('open');
+}
+function closeDoc() {
+  document.getElementById('docModal').classList.remove('open');
+}
+document.getElementById('docModal').addEventListener('click', function(e) {
+  if (e.target === this) closeDoc();
+});
+
 // ── 資料儲存 key ──────────────────────────────────────────────────
 const MEMBERS_KEY = 'yj_members_v1';
 const SESSION_KEY = 'yj_session_v1';
