@@ -16,6 +16,7 @@
     --border: #d4c5a9;
     --card: #faf7f2;
     --green: #2d6a4f;
+    --red: #8b1a1a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,9 +31,10 @@
       radial-gradient(ellipse at 80% 90%, rgba(139,69,19,0.06) 0%, transparent 50%);
   }
 
+  /* ── HEADER ── */
   header {
     text-align: center;
-    padding: 64px 24px 48px;
+    padding: 52px 24px 40px;
     border-bottom: 1px solid var(--border);
     position: relative;
   }
@@ -48,141 +50,201 @@
     border-radius: 50%;
     background: var(--ink);
     color: var(--gold-light);
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 1.8rem; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 20px;
     letter-spacing: 0.05em;
   }
-  header h1 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-  }
-  header p {
-    margin-top: 10px;
-    color: var(--muted);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    font-weight: 300;
-  }
+  header h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; letter-spacing: 0.12em; }
+  header p { margin-top: 10px; color: var(--muted); font-size: 0.9rem; letter-spacing: 0.05em; font-weight: 300; }
   .ornament { color: var(--gold); margin: 0 8px; }
 
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 52px 24px 80px;
+  /* 會員按鈕列 */
+  .member-bar {
+    margin-top: 20px;
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    flex-wrap: wrap;
   }
+  .btn-member {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 20px;
+    border-radius: 3px; border: none; cursor: pointer;
+    font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.05em; transition: all 0.2s;
+  }
+  .btn-login  { background: var(--ink); color: var(--gold-light); }
+  .btn-login:hover { background: #2a2a4e; }
+  .btn-register { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+  .btn-register:hover { background: var(--ink); color: var(--gold-light); }
+  .btn-logout { background: transparent; color: var(--muted); border: 1px solid var(--border); font-size: 0.78rem; padding: 7px 14px; }
+  .btn-logout:hover { border-color: var(--red); color: var(--red); }
+  .member-greeting {
+    font-size: 0.85rem; color: var(--muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .member-greeting strong { color: var(--ink); }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 52px 24px 80px; }
 
   .section-title {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 400;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 16px;
   }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
 
+  /* ── TOOL CARD ── */
   .tool-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 28px;
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-    display: block;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 28px; position: relative;
+    text-decoration: none; color: inherit; display: block;
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .tool-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--gold);
     border-radius: 6px 0 0 6px;
   }
-  .tool-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(26,26,46,0.08);
-  }
-  .tool-icon {
-    font-size: 2rem;
-    margin-bottom: 14px;
-  }
+  .tool-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,26,46,0.08); }
+  .tool-icon { font-size: 2rem; margin-bottom: 14px; }
   .tool-tag {
-    display: inline-block;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold-light);
-    border-radius: 2px;
-    padding: 2px 8px;
-    margin-bottom: 12px;
-    font-family: 'DM Mono', monospace;
+    display: inline-block; font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold);
+    border: 1px solid var(--gold-light); border-radius: 2px;
+    padding: 2px 8px; margin-bottom: 12px; font-family: 'DM Mono', monospace;
   }
-  .tool-card h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-bottom: 10px;
-  }
-  .tool-card p {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.75;
-    font-weight: 300;
-  }
+  .tool-card h2 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .tool-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
   .tool-arrow {
-    position: absolute;
-    right: 20px; bottom: 20px;
-    font-size: 0.8rem;
-    color: var(--gold);
-    font-family: 'DM Mono', monospace;
-    opacity: 0;
-    transition: opacity 0.2s;
+    position: absolute; right: 20px; bottom: 20px;
+    font-size: 0.8rem; color: var(--gold);
+    font-family: 'DM Mono', monospace; opacity: 0; transition: opacity 0.2s;
   }
   .tool-card:hover .tool-arrow { opacity: 1; }
 
+  /* 會員專區 card */
+  .member-section { margin-top: 48px; }
+  .member-gate {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 40px 28px; text-align: center;
+  }
+  .member-gate .lock-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .member-gate h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.06em; }
+  .member-gate p { font-size: 0.83rem; color: var(--muted); line-height: 1.8; }
+  .member-gate .btn-go {
+    display: inline-block; margin-top: 18px;
+    padding: 10px 24px; background: var(--ink); color: var(--gold-light);
+    border: none; border-radius: 3px; cursor: pointer;
+    font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.05em; text-decoration: none; transition: background 0.2s;
+  }
+  .member-gate .btn-go:hover { background: #2a2a4e; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: rgba(26,26,46,0.6); align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--card); border-radius: 6px; width: 100%; max-width: 440px;
+    box-shadow: 0 20px 60px rgba(26,26,46,0.25); overflow: hidden;
+  }
+  .modal-head {
+    background: var(--ink); color: var(--gold-light);
+    padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-head h2 { font-size: 1rem; font-weight: 600; letter-spacing: 0.08em; }
+  .modal-close {
+    background: none; border: none; color: var(--gold-light);
+    font-size: 1.2rem; cursor: pointer; opacity: 0.7; line-height: 1;
+  }
+  .modal-close:hover { opacity: 1; }
+  .modal-body { padding: 28px 24px; }
+
+  /* Tabs */
+  .modal-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+  .modal-tab {
+    flex: 1; padding: 10px; background: none; border: none; cursor: pointer;
+    font-family: 'Noto Serif TC', serif; font-size: 0.88rem; color: var(--muted);
+    letter-spacing: 0.05em; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+  .modal-tab.active { color: var(--ink); border-bottom-color: var(--gold); font-weight: 600; }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* Form */
+  .form-field { margin-bottom: 16px; }
+  .form-field label {
+    display: block; font-size: 0.8rem; font-weight: 600;
+    color: var(--ink); margin-bottom: 5px; letter-spacing: 0.04em;
+  }
+  .form-field label .req { color: var(--red); margin-left: 2px; }
+  .form-field input {
+    width: 100%; padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 3px;
+    background: #fff; font-family: 'Noto Serif TC', serif; font-size: 0.9rem;
+    color: var(--ink); transition: border-color 0.2s;
+  }
+  .form-field input:focus { outline: none; border-color: var(--gold); }
+  .form-field input.err { border-color: var(--red); }
+  .form-field .tip { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+
+  .checkbox-row {
+    display: flex; align-items: flex-start; gap: 10px; margin: 16px 0;
+  }
+  .checkbox-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--ink); flex-shrink: 0; margin-top: 2px; }
+  .checkbox-row label { font-size: 0.8rem; color: var(--muted); line-height: 1.6; cursor: pointer; }
+  .checkbox-row label a { color: var(--ink); }
+
+  .btn-submit {
+    width: 100%; padding: 12px;
+    background: var(--ink); color: var(--gold-light);
+    border: none; border-radius: 3px; cursor: pointer;
+    font-family: 'Noto Serif TC', serif; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.06em; transition: background 0.2s; margin-top: 4px;
+  }
+  .btn-submit:hover { background: #2a2a4e; }
+
+  .form-msg {
+    padding: 10px 12px; border-radius: 3px; font-size: 0.82rem;
+    margin-bottom: 14px; display: none;
+  }
+  .form-msg.ok { background: #d5f5e3; border: 1px solid #2d6a4f; color: #2d6a4f; }
+  .form-msg.err { background: #fde8e8; border: 1px solid var(--red); color: var(--red); }
+
+  /* ── FOOTER ── */
   footer {
-    text-align: center;
-    padding: 32px 24px;
+    text-align: center; padding: 40px 24px;
     border-top: 1px solid var(--border);
-    font-size: 0.78rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
+    font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em;
   }
 </style>
 </head>
 <body>
 
+<!-- ══ HEADER ══ -->
 <header>
   <div class="avatar">YJ</div>
   <h1>YUAN-JIE 的小工具集</h1>
   <p>用 Claude Code 打造的實用工具 <span class="ornament">◆</span> 持續更新中</p>
+
+  <div class="member-bar" id="memberBar">
+    <!-- 動態填入 -->
+  </div>
 </header>
 
+<!-- ══ MAIN ══ -->
 <div class="container">
-  <p class="section-title">工具列表</p>
 
+  <!-- 公開工具 -->
+  <p class="section-title">公開工具</p>
   <div class="grid">
-
-    <!-- 貸款計算機 -->
     <a class="tool-card" href="https://nydiahsieh.github.io/loan-calculator/" target="_blank">
       <div class="tool-icon">🏦</div>
       <span class="tool-tag">財務計算</span>
@@ -191,7 +253,6 @@
       <span class="tool-arrow">→ 開啟工具</span>
     </a>
 
-    <!-- 印花稅計算工具 -->
     <a class="tool-card" href="https://nydiahsieh.github.io/stamp-tax/" target="_blank">
       <div class="tool-icon">🧾</div>
       <span class="tool-tag">稅務計算</span>
@@ -199,25 +260,28 @@
       <p>支援多種憑證類型，可匯入 Excel／PDF／Word 批次計算，並匯出申報明細，適合會計人員日常使用。</p>
       <span class="tool-arrow">→ 開啟工具</span>
     </a>
-
-    <!-- 未來工具佔位 -->
-
   </div>
+
+  <!-- 會員專區 -->
+  <div class="member-section">
+    <p class="section-title">會員專區</p>
+    <div id="memberContent">
+      <!-- 動態填入 -->
+    </div>
+  </div>
+
 </div>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <div style="margin-bottom: 20px;">
-    <div style="font-size: 1rem; font-weight: 600; color: var(--ink); letter-spacing: 0.08em; margin-bottom: 4px;">
-      元傑國際有限公司
-    </div>
-    <div style="font-size: 0.85rem; color: var(--muted); letter-spacing: 0.03em; margin-bottom: 14px;">
-      Yuan-Jie International Co., Ltd.
-    </div>
+    <div style="font-size: 1rem; font-weight: 600; color: var(--ink); letter-spacing: 0.08em; margin-bottom: 4px;">元傑國際有限公司</div>
+    <div style="font-size: 0.85rem; color: var(--muted); letter-spacing: 0.03em; margin-bottom: 14px;">Yuan-Jie International Co., Ltd.</div>
     <div style="width: 40px; height: 2px; background: var(--gold); margin: 0 auto 16px;"></div>
     <div style="font-size: 0.82rem; color: var(--muted); line-height: 2;">
       📍 台南市永康區中華路703巷57號<br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No. 57, Ln. 703, Zhonghua Rd., Yongkang Dist., Tainan City 710009, Taiwan (R.O.C.)<br>
-      ✉️ <a href="mailto:yuanjie.ltd@gmail.com" style="color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border);">yuanjie.ltd@gmail.com</a>
+      ✉️ <a href="mailto:yuanjie.ltd@gmail.com" style="color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border);">yuanjie.ltd@gmail.com</a>
     </div>
   </div>
   <div style="font-size: 0.75rem; color: var(--border); margin-top: 8px;">
@@ -225,5 +289,205 @@
   </div>
 </footer>
 
+<!-- ══ 登入 / 註冊 MODAL ══ -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="modalTitle">會員登入 / 註冊</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabLogin" onclick="switchTab('login')">登入</button>
+        <button class="modal-tab" id="tabRegister" onclick="switchTab('register')">註冊新帳號</button>
+      </div>
+
+      <!-- 登入 -->
+      <div class="tab-pane active" id="paneLogin">
+        <div class="form-msg" id="loginMsg"></div>
+        <div class="form-field">
+          <label>電子郵件 <span class="req">*</span></label>
+          <input type="email" id="loginEmail" placeholder="請輸入電子郵件">
+        </div>
+        <div class="form-field">
+          <label>密碼 <span class="req">*</span></label>
+          <input type="password" id="loginPwd" placeholder="請輸入密碼" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="btn-submit" onclick="doLogin()">登入</button>
+      </div>
+
+      <!-- 註冊 -->
+      <div class="tab-pane" id="paneRegister">
+        <div class="form-msg" id="regMsg"></div>
+        <div class="form-field">
+          <label>姓名 <span class="req">*</span></label>
+          <input type="text" id="regName" placeholder="請輸入您的姓名">
+        </div>
+        <div class="form-field">
+          <label>電子郵件 <span class="req">*</span></label>
+          <input type="email" id="regEmail" placeholder="請輸入電子郵件">
+          <div class="tip">將作為登入帳號使用</div>
+        </div>
+        <div class="form-field">
+          <label>密碼 <span class="req">*</span></label>
+          <input type="password" id="regPwd" placeholder="至少 8 個字元">
+          <div class="tip">請設定至少 8 個字元的密碼</div>
+        </div>
+        <div class="form-field">
+          <label>確認密碼 <span class="req">*</span></label>
+          <input type="password" id="regPwd2" placeholder="再次輸入密碼">
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="agreeTerms">
+          <label for="agreeTerms">我已閱讀並同意本網站的<a href="#" onclick="return false">使用條款</a>與<a href="#" onclick="return false">隱私政策</a>。完成註冊即表示同意。</label>
+        </div>
+        <button class="btn-submit" onclick="doRegister()">立即註冊</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 資料儲存 key ──────────────────────────────────────────────────
+const MEMBERS_KEY = 'yj_members_v1';
+const SESSION_KEY = 'yj_session_v1';
+
+function getMembers() { try { return JSON.parse(localStorage.getItem(MEMBERS_KEY) || '[]'); } catch(e) { return []; } }
+function saveMembers(m) { localStorage.setItem(MEMBERS_KEY, JSON.stringify(m)); }
+function getSession() { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch(e) { return null; } }
+function saveSession(s) { localStorage.setItem(SESSION_KEY, JSON.stringify(s)); }
+function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+// 簡單雜湊（防止明文儲存）
+async function hashPwd(pwd) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd + 'yj_salt_2026'));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── 渲染 UI ──────────────────────────────────────────────────────
+function renderUI() {
+  const session = getSession();
+  const bar = document.getElementById('memberBar');
+  const content = document.getElementById('memberContent');
+
+  if (session && session.loggedIn) {
+    bar.innerHTML = `
+      <div class="member-greeting">歡迎回來，<strong>${esc(session.name)}</strong> 您好</div>
+      <button class="btn-member btn-logout" onclick="doLogout()">登出</button>`;
+
+    content.innerHTML = `
+      <div class="grid">
+        <a class="tool-card" href="https://nydiahsieh.github.io/loan-management/" target="_blank">
+          <div class="tool-icon">🏦</div>
+          <span class="tool-tag" style="color:var(--green);border-color:var(--green)">會員專屬</span>
+          <h2>銀行貸款控管系統</h2>
+          <p>多筆貸款集中管理，追蹤還款進度、利率變動、本息明細，並支援匯出報表。</p>
+          <span class="tool-arrow">→ 開啟工具</span>
+        </a>
+      </div>`;
+  } else {
+    bar.innerHTML = `
+      <button class="btn-member btn-login" onclick="openModal('login')">🔑 會員登入</button>
+      <button class="btn-member btn-register" onclick="openModal('register')">📝 免費註冊</button>`;
+
+    content.innerHTML = `
+      <div class="member-gate">
+        <div class="lock-icon">🔒</div>
+        <h3>會員專屬工具</h3>
+        <p>此區工具僅限會員使用。<br>免費註冊後即可立即存取所有會員專屬功能。</p>
+        <button class="btn-go" onclick="openModal('register')">免費註冊 →</button>
+      </div>`;
+  }
+}
+
+// ── Modal ─────────────────────────────────────────────────────────
+function openModal(tab) {
+  document.getElementById('authModal').classList.add('open');
+  switchTab(tab || 'login');
+}
+function closeModal() {
+  document.getElementById('authModal').classList.remove('open');
+  clearMsgs();
+}
+function switchTab(t) {
+  ['login','register'].forEach(id => {
+    document.getElementById('tab' + id.charAt(0).toUpperCase() + id.slice(1)).classList.toggle('active', id === t);
+    document.getElementById('pane' + id.charAt(0).toUpperCase() + id.slice(1)).classList.toggle('active', id === t);
+  });
+  clearMsgs();
+}
+function clearMsgs() {
+  ['loginMsg','regMsg'].forEach(id => { const el = document.getElementById(id); el.style.display='none'; el.textContent=''; });
+  document.querySelectorAll('.form-field input').forEach(i => i.classList.remove('err'));
+}
+function showMsg(id, type, txt) {
+  const el = document.getElementById(id);
+  el.className = 'form-msg ' + type;
+  el.textContent = txt;
+  el.style.display = 'block';
+}
+
+// ── 登入 ──────────────────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pwd   = document.getElementById('loginPwd').value;
+  if (!email || !pwd) { showMsg('loginMsg','err','請填寫電子郵件與密碼。'); return; }
+  const hash = await hashPwd(pwd);
+  const members = getMembers();
+  const member = members.find(m => m.email === email && m.pwdHash === hash);
+  if (!member) { showMsg('loginMsg','err','電子郵件或密碼錯誤，請重新輸入。'); return; }
+  saveSession({ loggedIn: true, name: member.name, email: member.email });
+  closeModal();
+  renderUI();
+}
+
+// ── 註冊 ──────────────────────────────────────────────────────────
+async function doRegister() {
+  const name  = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pwd   = document.getElementById('regPwd').value;
+  const pwd2  = document.getElementById('regPwd2').value;
+  const agree = document.getElementById('agreeTerms').checked;
+
+  let ok = true;
+  if (!name)  { document.getElementById('regName').classList.add('err');  ok = false; }
+  if (!email) { document.getElementById('regEmail').classList.add('err'); ok = false; }
+  if (!pwd)   { document.getElementById('regPwd').classList.add('err');   ok = false; }
+  if (!ok)    { showMsg('regMsg','err','請填寫所有必填欄位（標有 * 號）。'); return; }
+  if (pwd.length < 8) { showMsg('regMsg','err','密碼至少需要 8 個字元。'); return; }
+  if (pwd !== pwd2)   { showMsg('regMsg','err','兩次輸入的密碼不一致。'); return; }
+  if (!agree)         { showMsg('regMsg','err','請先勾選同意使用條款與隱私政策。'); return; }
+
+  const members = getMembers();
+  if (members.find(m => m.email === email)) {
+    showMsg('regMsg','err','此電子郵件已被註冊，請直接登入或使用其他信箱。'); return;
+  }
+
+  const pwdHash = await hashPwd(pwd);
+  members.push({ name, email, pwdHash, createdAt: new Date().toISOString() });
+  saveMembers(members);
+  saveSession({ loggedIn: true, name, email });
+  showMsg('regMsg','ok','✅ 註冊成功！歡迎加入，即將為您開啟會員內容…');
+  setTimeout(() => { closeModal(); renderUI(); }, 1200);
+}
+
+// ── 登出 ──────────────────────────────────────────────────────────
+function doLogout() {
+  if (!confirm('確定要登出嗎？')) return;
+  clearSession();
+  renderUI();
+}
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// 點擊背景關閉
+document.getElementById('authModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+renderUI();
+</script>
 </body>
 </html>
